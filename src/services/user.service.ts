@@ -5,4 +5,9 @@ export default class UserService extends BaseService{
     constructor(){
         super(UserModel);
     }
+
+    async getByName(name: string){
+        let response = await this.model.findOne({ name });
+        return response;
+    }
 }
