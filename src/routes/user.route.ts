@@ -11,3 +11,6 @@ userRoutes.get("/:id", UserControllerInstance.getById);
 userRoutes.put('/:id', UserControllerInstance.update);
 // /user/:id
 userRoutes.delete('/:id', UserControllerInstance.delete);
+
+// /user/login
+userRoutes.post('/login', UserControllerInstance.logIn);

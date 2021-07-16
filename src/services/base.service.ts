@@ -1,4 +1,4 @@
-import { Model } from "mongoose";
+import mongoose, { isValidObjectId, Model } from "mongoose";
 
 export class BaseService {
     model: Model<any>;
@@ -13,13 +13,15 @@ export class BaseService {
     }
     // Read
     async getById(id: any) {
-        let response = await this.model.findById(id);
-        if (!response) new Error("No se pudo encontrar el item");
+        let response = await this.model.findById({_id: mongoose.Types.ObjectId(id)});
+        if(!response){
+            throw new Error("Not found!");
+        }
         return response;
     }
 
     async getAll() {
-        let response = await this.model.find({});
+        let response = await this.model.find();
         return response;
     }
     // Update
