@@ -9,7 +9,7 @@ export class UserController{
     // Response --> Lo que nosotros respondemos al usuario.
     async save(req: Request, res: Response, next: NextFunction){
         try {
-            const response = await UserServiceInstance.save(req.body);
+            const response = await UserServiceInstance.save(req.body); //email falta...
             return res.json(response);
         } catch (error) {
             next(error);

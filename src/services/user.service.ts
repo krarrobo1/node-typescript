@@ -1,7 +1,8 @@
 import { BaseService } from "./base.service";
 import { UserModel } from '../models/User';
-import { Credentials } from "../dtos/credentials.dto";
+import { Credentials } from "../dtos/users/credentials.dto";
 import bcryptjs from 'bcryptjs';
+import { LoginError } from "../errors/loginerror";
 
 export default class UserService extends BaseService{
     constructor(){
@@ -17,13 +18,14 @@ export default class UserService extends BaseService{
         const { email, password } = credentials;
         let user = await this.model.findOne({ email });
         if(!user){
-            throw new Error("Invalid credentials");
+            throw new LoginError("Invalid credentials", 401);
         }else{
             const toBeChecked = bcryptjs.hashSync(password, user.salt);
             if(toBeChecked !== user.password){
-                throw new Error("Invalid credentials");
+                throw new LoginError("Invalid credentials", 401);
             }
         }
         return user;
     }
+
 }

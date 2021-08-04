@@ -31,12 +31,13 @@ export interface IUser extends Document {
     title: string; // titulo
     aboutme: string; // pequena descripcion
     description: string; // +Extensa
-    email: string;
+    email: string; // ricardoarrobo@gmail.com
     password: string;
     salt: string
     experiences: Experience[],
     contact: Contact;
     avatar?: string;
+    image?:string;
     socialNetworks: SocialNetworks
 }
 
@@ -49,6 +50,7 @@ const schema = new Schema<IUser>({
     description: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
+    image: String,
     salt: { type: String },
     experiences: [{
         title: String,
@@ -68,6 +70,10 @@ const schema = new Schema<IUser>({
     },
     avatar: String
 });
+
+// 4 tablas
+
+/// 
 
 // Encrypt Password w/ bcryptJS
 // Middleware se ejecutara antes de guardar el documento en la BD.
